@@ -1,3 +1,3 @@
-export default function(destination, parameters = '') {
-  window.location.href = `../../index.html`;
+export function redirect(destination, parameters = '') {
+    window.location.href = `../${destination}/index.html?${parameters}`;
 }
