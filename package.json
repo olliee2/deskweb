@@ -1,0 +1,27 @@
+{
+  "name": "deskweb",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/olliee2/deskweb#readme",
+  "bugs": {
+    "url": "https://github.com/olliee2/deskweb/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olliee2/deskweb.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "eslint": "^9.31.0",
+    "eslint-config-google": "^0.14.0",
+    "prettier": "^3.6.2",
+    "serve": "^14.2.4",
+    "typescript": "^5.8.3"
+  }
+}
