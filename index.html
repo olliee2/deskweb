@@ -3,18 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Deskweb</title>
-    <link href="public/pc.png" as="image" rel="preload">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            background: #13181d url("public/pc.png") no-repeat center center fixed;
-            background-size: cover;
-        }
-    </style>
+    <link as="image" href="public/pc.png" rel="preload">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
-<p>Welcome to deskweb</p>
-<img alt="Spinning Cat" src="public/spinning-cat.gif">
-<p>Using the pc model from celeste</p>
+<div id="wrapper">
+    <img alt="PC" id="background-image" src="public/pc.png"/>
+    <iframe id="pc" src="pc/loading"></iframe>
+</div>
 </body>
 </html>
