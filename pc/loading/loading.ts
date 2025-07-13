@@ -1,4 +1,4 @@
-import redirect from '../../src/redirect';
+import redirect from '../utils.js';
 
 const params = new URLSearchParams(document.location.search);
 console.log(params);
