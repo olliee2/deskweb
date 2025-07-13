@@ -1,5 +1,7 @@
-var _a;
 import { redirect } from '../common/utils.js';
-(_a = document.getElementById('login-button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => {
+const loginButton = document.getElementById('login-button');
+if (!loginButton)
+    throw new Error('Missing login-button');
+loginButton.addEventListener('click', () => {
     redirect('loading', 'destination=desktop&duration=1');
 });

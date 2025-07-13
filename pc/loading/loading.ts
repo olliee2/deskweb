@@ -2,11 +2,11 @@ import { redirect } from '../common/utils.js';
 
 const params = new URLSearchParams(document.location.search);
 const destination = params.get('destination');
-if (!destination) throw new Error('Missing destination in loading.ts');
+if (!destination) throw new Error('Missing destination');
 const duration = Number(params.get('duration'));
-if (!duration) throw new Error('Missing duration in loading.ts');
+if (!duration) throw new Error('Missing duration');
 const dotsSpan = document.getElementById('dots');
-if (!dotsSpan) throw new Error('Missing dotsSpan in loading.ts');
+if (!dotsSpan) throw new Error('Missing dotsSpan');
 
 setTimeout(() => {
   redirect(destination);
