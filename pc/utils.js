@@ -1,3 +1,3 @@
 export default function (destination, parameters = '') {
-    window.location.href = `../index.html`;
+    window.location.href = `../${destination}/index.html?${parameters}`;
 }
