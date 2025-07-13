@@ -17,8 +17,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "start": "serve .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "serve ."
   },
   "devDependencies": {
     "eslint": "^9.31.0",
