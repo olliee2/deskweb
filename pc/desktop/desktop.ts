@@ -1,4 +1,4 @@
-const timeElement = document.getElementById('time')! as HTMLTimeElement;
+const timeElement = document.getElementById('time') as HTMLTimeElement;
 if (!timeElement) throw new Error('Missing time');
 
 function renderTime() {
@@ -9,6 +9,16 @@ function renderTime() {
   timeElement.textContent = time;
   timeElement.dateTime = time;
 }
+
+const appIframe = document.getElementById('app') as HTMLIFrameElement;
+if (!appIframe) throw new Error('Missing app');
+
+const homeButton = document.getElementById('home');
+if (!homeButton) throw new Error('Missing home');
+
+homeButton.addEventListener('click', () => {
+  appIframe.src = '../shortcuts/index.html';
+});
 
 function render() {
   renderTime();
