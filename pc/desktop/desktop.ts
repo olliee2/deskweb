@@ -20,6 +20,19 @@ homeButton.addEventListener('click', () => {
   appIframe.src = '../shortcuts/index.html';
 });
 
+const back = document.getElementById('back');
+if (!back) throw new Error('Missing back');
+const forward = document.getElementById('forward');
+if (!forward) throw new Error('Missing forward');
+
+back.addEventListener('click', () => {
+  history.back();
+});
+
+forward.addEventListener('click', () => {
+  history.forward();
+});
+
 function render() {
   renderTime();
   requestAnimationFrame(render);
