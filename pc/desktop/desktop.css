@@ -17,6 +17,8 @@ iframe {
 }
 
 #taskbar {
+    box-sizing: border-box;
+    padding: 0.5vh;
     background-color: #270f36;
     height: 10vh;
     font-size: 7vh;

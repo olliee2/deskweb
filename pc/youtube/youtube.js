@@ -41,3 +41,6 @@ for (const video of playlist) {
     ul.append(li);
 }
 playlistList.replaceChildren(ul);
+const searchBar = document.getElementById('search-bar');
+if (!searchBar)
+    throw new Er;

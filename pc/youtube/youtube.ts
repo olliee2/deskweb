@@ -45,3 +45,6 @@ for (const video of playlist) {
   ul.append(li);
 }
 playlistList.replaceChildren(ul);
+
+const searchBar = document.getElementById('search-bar') as HTMLInputElement;
+if (!searchBar) throw new Error('Missing search-bar');
