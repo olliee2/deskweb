@@ -8,4 +8,5 @@ function resizePC() {
     pc.style.width = w + 'px';
     pc.style.height = h + 'px';
 }
+window.addEventListener('resize', resizePC);
 resizePC();
