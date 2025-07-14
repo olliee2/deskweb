@@ -2,3 +2,20 @@ body {
     background-color: #4d0000;
     color: white;
 }
+
+#container {
+    display: flex;
+    flex-direction: row;
+    gap: 4vw;
+}
+
+main {
+    width: 60vw;
+}
+
+#ytplayer {
+    min-width: 200px;
+    min-height: 200px;
+    width: 30vw;
+    height: 30vw;
+}
