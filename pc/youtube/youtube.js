@@ -35,7 +35,7 @@ for (const video of playlist) {
     button.className = 'song';
     button.textContent = video.name;
     button.addEventListener('click', () => {
-        updateVideoWithID(video.id);
+        updateVideoFromID(video.id);
     });
     li.append(button);
     ul.append(li);
@@ -61,14 +61,19 @@ function updateVideoFromSearchBar() {
     if (URL.canParse(term)) {
         updateVideoFromURL(term);
     }
+    else if (URL.canParse('https://' + term) &&
+        term.includes('.') &&
+        term.includes('/')) {
+        updateVideoFromURL('https://' + term);
+    }
     else {
-        if (URL.canParse('https://' + term)) {
-            updateVideoFromURL('https://' + term);
-        }
+        updateVideoFromID(term);
     }
 }
-function updateVideoFromURL(url) { }
-function updateVideoWithID(id) {
+function updateVideoFromURL(url) {
+    console.log(url);
+}
+function updateVideoFromID(id) {
     console.log(id);
     ytPlayer.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&color=white&disablekb=1`;
 }
