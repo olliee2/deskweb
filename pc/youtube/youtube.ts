@@ -63,17 +63,17 @@ submitSearch.addEventListener('click', () => {
 });
 
 function updateVideoFromSearchBar() {
-  if (URL.canParse(searchBar.value))
-  const url = new URL
-  console.log(searchTerm);
-  if (searchTerm.startsWith('https://youtu.be/')) {
-    const suffix = searchTerm.split('/')[3];
-    const id = suffix.split('?')[0];
-    updateVideoWithID(id);
-  } else if (searchTerm.startsWith('www.youtube.com/watch?v=')) {
-    const suffix =
+  const term = searchBar.value.trim();
+  if (URL.canParse(term)) {
+    updateVideoFromURL(term);
+  } else {
+    if (URL.canParse('https://' + term)) {
+      updateVideoFromURL('https://' + term);
+    }
   }
 }
+
+function updateVideoFromURL(url: string) {}
 
 function updateVideoWithID(id: string) {
   console.log(id);

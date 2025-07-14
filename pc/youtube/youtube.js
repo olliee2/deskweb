@@ -57,18 +57,17 @@ submitSearch.addEventListener('click', () => {
     updateVideoFromSearchBar();
 });
 function updateVideoFromSearchBar() {
-    if (URL.canParse(searchBar.value))
-        const url = new URL;
-    console.log(searchTerm);
-    if (searchTerm.startsWith('https://youtu.be/')) {
-        const suffix = searchTerm.split('/')[3];
-        const id = suffix.split('?')[0];
-        updateVideoWithID(id);
+    const term = searchBar.value.trim();
+    if (URL.canParse(term)) {
+        updateVideoFromURL(term);
     }
-    else if (searchTerm.startsWith('www.youtube.com/watch?v=')) {
-        const suffix = ;
+    else {
+        if (URL.canParse('https://' + term)) {
+            updateVideoFromURL('https://' + term);
+        }
     }
 }
+function updateVideoFromURL(url) { }
 function updateVideoWithID(id) {
     console.log(id);
     ytPlayer.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&color=white&disablekb=1`;
