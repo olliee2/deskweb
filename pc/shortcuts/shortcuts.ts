@@ -1,6 +1,6 @@
-import { redirect } from '../common/utils';
+import { redirect } from '../common/utils.js';
 
-const shortcutButtons = document.getElementById('shortcuts')?.children;
+const shortcutButtons = document.getElementById('container')?.children;
 if (!shortcutButtons) throw new Error('Missing shortcuts');
 
 for (const button of Array.from(shortcutButtons) as HTMLElement[]) {
