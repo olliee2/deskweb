@@ -1,18 +1,3 @@
-import { redirect } from '../common/utils.js';
-
-const shortcutButtons = document.getElementById('shortcuts')?.children;
-if (!shortcutButtons) throw new Error('Missing shortcuts');
-
-for (const button of Array.from(shortcutButtons) as HTMLElement[]) {
-  button.addEventListener('click', () => {
-    if (button.dataset.app) {
-      redirect(button.dataset.app);
-    } else {
-      console.error('Missing app data attribute on button');
-    }
-  });
-}
-
 const timeElement = document.getElementById('time')! as HTMLTimeElement;
 if (!timeElement) throw new Error('Missing time');
 
