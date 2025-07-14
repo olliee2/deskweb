@@ -77,11 +77,25 @@ function updateVideoFromSearchBar() {
   }
 }
 
-function updateVideoFromURL(url: string) {
-  console.log(url);
+function updateVideoFromURL(passedURL: string) {
+  const url = new URL(passedURL);
+  if (url.hostname === 'youtu.be') {
+    updateVideoFromID(url.pathname);
+  } else if (
+    url.hostname === 'www.youtube.com' ||
+    url.hostname === 'youtube.com'
+  ) {
+    const videoID = url.searchParams.get('v');
+    if (videoID) {
+      updateVideoFromID(videoID);
+    } else {
+      console.error('Invalid URL', passedURL);
+    }
+  } else {
+    console.error('Invalid URL', passedURL);
+  }
 }
 
 function updateVideoFromID(id: string) {
-  console.log(id);
   ytPlayer.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&color=white&disablekb=1`;
 }
