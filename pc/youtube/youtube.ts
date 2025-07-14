@@ -48,18 +48,22 @@ playlistList.replaceChildren(ul);
 
 const searchBar = document.getElementById('search-bar') as HTMLInputElement;
 if (!searchBar) throw new Error('Missing search-bar');
+
+searchBar.value = '';
+
 const submitSearch = document.getElementById('submit-search');
 if (!submitSearch) throw new Error('Missing submit-search');
 
 searchBar.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     updateVideoFromSearchBar();
+    searchBar.value = '';
   }
 });
 
 submitSearch.addEventListener('click', () => {
-  console.log('clicked!');
   updateVideoFromSearchBar();
+  searchBar.value = '';
 });
 
 function updateVideoFromSearchBar() {
