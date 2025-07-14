@@ -1,0 +1,27 @@
+body {
+    padding: 0;
+}
+
+#container {
+    background-color: #5a406d;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100vh;
+}
+
+button {
+    background: none;
+    border: none;
+    height: 20vh;
+    width: 20vh;
+    padding: 0;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}

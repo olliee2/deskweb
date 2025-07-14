@@ -16,13 +16,17 @@ for (const button of Array.from(shortcutButtons) as HTMLElement[]) {
 const timeElement = document.getElementById('time')! as HTMLTimeElement;
 if (!timeElement) throw new Error('Missing time');
 
-function render() {
+function renderTime() {
   const currentDate = new Date();
   const hours = currentDate.getHours();
   const minutes = currentDate.getMinutes();
   const time = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
   timeElement.textContent = time;
   timeElement.dateTime = time;
+}
+
+function render() {
+  renderTime();
   requestAnimationFrame(render);
 }
 

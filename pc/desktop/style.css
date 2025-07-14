@@ -1,10 +1,23 @@
 body {
     background-color: #222;
+    color: white;
+    margin: 0;
 }
 
-#shortcuts {
+#container {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+}
+
+iframe {
+    border: none;
     height: 80vh;
+    width: 100vw;
+}
+
+#taskbar {
+    background-color: #270f36;
+    height: 20vh;
+    font-size: 16vh;
+    width: 100vw;
 }
