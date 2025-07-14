@@ -35,7 +35,7 @@ for (const video of playlist) {
     button.className = 'song';
     button.textContent = video.name;
     button.addEventListener('click', () => {
-        ytPlayer.src = `https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&color=white&disablekb=1`;
+        updateVideoWithID(video.id);
     });
     li.append(button);
     ul.append(li);
@@ -43,4 +43,33 @@ for (const video of playlist) {
 playlistList.replaceChildren(ul);
 const searchBar = document.getElementById('search-bar');
 if (!searchBar)
-    throw new Er;
+    throw new Error('Missing search-bar');
+const submitSearch = document.getElementById('submit-search');
+if (!submitSearch)
+    throw new Error('Missing submit-search');
+searchBar.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        updateVideoFromSearchBar();
+    }
+});
+submitSearch.addEventListener('click', () => {
+    console.log('clicked!');
+    updateVideoFromSearchBar();
+});
+function updateVideoFromSearchBar() {
+    if (URL.canParse(searchBar.value))
+        const url = new URL;
+    console.log(searchTerm);
+    if (searchTerm.startsWith('https://youtu.be/')) {
+        const suffix = searchTerm.split('/')[3];
+        const id = suffix.split('?')[0];
+        updateVideoWithID(id);
+    }
+    else if (searchTerm.startsWith('www.youtube.com/watch?v=')) {
+        const suffix = ;
+    }
+}
+function updateVideoWithID(id) {
+    console.log(id);
+    ytPlayer.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&color=white&disablekb=1`;
+}
