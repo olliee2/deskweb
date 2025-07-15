@@ -3,4 +3,57 @@ body {
     color: #fff;
     margin: 0;
     font-size: 2.5vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    background: #000;
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button:active, button:focus {
+    background: #333;
+}
+
+input, textarea {
+    background: #000;
+    color: #fff;
+    padding: 0.5em;
+    border: none;
+    border-radius: 0.5em;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 4vw;
+    margin: 1vw 0;
+}
+
+label {
+    font-size: 2vw;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box {
+    box-sizing: border-box;
 }

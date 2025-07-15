@@ -1,6 +1,3 @@
-body {
-    overflow: hidden;
-}
 
 #container {
     display: flex;
@@ -30,16 +27,12 @@ iframe {
 }
 
 #taskbar button {
+    /* background, border, cursor, display, align-items, justify-content now in base.css */
     background: none;
-    border: none;
     padding: 0.5em;
     margin: 0 0.2em;
-    cursor: pointer;
     width: 2.5em;
     height: 2.5em;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #taskbar img {
@@ -48,9 +41,9 @@ iframe {
 }
 
 @media (max-width: 600px) {
-    body {
+    /* body {
         font-size: 4vw;
-    }
+    } */
 
     #taskbar {
         font-size: 8vw;

@@ -27,16 +27,10 @@ textarea {
 }
 
 header button {
-    background: none;
-    border: none;
     padding: 0.5em;
     margin: 0 0.2em;
-    cursor: pointer;
     width: 2.5em;
     height: 2.5em;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
 }
 
 header img {
@@ -44,21 +38,12 @@ header img {
     height: 2em;
 }
 
-input, textarea {
-    background: #000;
-    color: #fff;
-    padding: 0.5em;
-    box-sizing: border-box;
-}
-
-input:focus, textarea:focus {
-
-    background: #000;
-    color: #fff;
-}
-
 @media (max-width: 600px) {
     body {
+        font-size: 4vw;
+    }
+
+    label {
         font-size: 4vw;
     }
 

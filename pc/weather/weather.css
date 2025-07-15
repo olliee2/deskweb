@@ -8,11 +8,6 @@
     box-sizing: border-box;
 }
 
-h1 {
-    font-size: 4vw;
-    margin: 1vw 0;
-}
-
 #weather-days {
     display: flex;
     flex-wrap: wrap;
@@ -47,7 +42,7 @@ h1 {
 }
 
 label, input, button {
-    font-size: 2vw;
+    /* font-size, background, color, border, border-radius, box-sizing, transition now in base.css */
 }
 
 button {
