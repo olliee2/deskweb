@@ -4,14 +4,14 @@ if ('geolocation' in navigator) {
 }
 async function showWeather(latitude, longitude) {
     var _a;
-    const data = await fetchWeather(latitude, longitude);
+    const data = await fetchTemperature(latitude, longitude);
     if (!((_a = data === null || data === void 0 ? void 0 : data.daily) === null || _a === void 0 ? void 0 : _a.temperature_2m_max)) {
         console.error('No temperature data available');
         return;
     }
     displayTemperatures(data.daily.temperature_2m_max);
 }
-async function fetchWeather(latitude, longitude) {
+async function fetchTemperature(latitude, longitude) {
     const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max`;
     try {
         const response = await fetch(apiUrl);

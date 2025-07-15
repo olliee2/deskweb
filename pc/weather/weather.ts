@@ -16,7 +16,7 @@ interface WeatherApiResponse {
 }
 
 async function showWeather(latitude: number, longitude: number) {
-  const data = await fetchWeather(latitude, longitude);
+  const data = await fetchTemperature(latitude, longitude);
   if (!data?.daily?.temperature_2m_max) {
     console.error('No temperature data available');
     return;
@@ -24,7 +24,7 @@ async function showWeather(latitude: number, longitude: number) {
   displayTemperatures(data.daily.temperature_2m_max);
 }
 
-async function fetchWeather(
+async function fetchTemperature(
   latitude: number,
   longitude: number,
 ): Promise<WeatherApiResponse | null> {
