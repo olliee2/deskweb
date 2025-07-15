@@ -9,9 +9,45 @@
 </head>
 <body>
 <div id="container">
-   <h1>Calculator</h1>
-    <div id=""
+    <h1>Calculator</h1>
+    <div id="output">
+        <span id="equation"></span>
+        <span id="answer"></span>
+    </div>
+    <div id="inputs">
+        <button class="character symbol" data-symbol="(">(</button>
+        <button class="character symbol" data-symbol=")">)</button>
+        <button class="special" id="backspace">⌫</button>
+        <button class="special" id="clear">C</button>
+
+        <button class="character number" data-symbol="7">7</button>
+        <button class="character number" data-symbol="8">8</button>
+        <button class="character number" data-symbol="9">9</button>
+        <button class="character symbol" data-symbol="÷">÷</button>
+
+        <button class="character number" data-symbol="4">4</button>
+        <button class="character number" data-symbol="5">5</button>
+        <button class="character number" data-symbol="6">6</button>
+        <button class="character symbol" data-symbol="×">×</button>
+
+        <button class="character number" data-symbol="1">1</button>
+        <button class="character number" data-symbol="2">2</button>
+        <button class="character number" data-symbol="3">3</button>
+        <button class="character symbol" data-symbol="-">-</button>
+
+        <button class="character number" data-symbol="0">0</button>
+        <button class="character symbol" data-symbol=".">.</button>
+        <button class="symbol" id="equals">=</button>
+        <button class="character symbol" data-symbol="+">+</button>
+    </div>
 </div>
 <script src="calculator.js"></script>
 </body>
 </html>
+<!-- 0 1 2 3 4 5 6 7 8 9 . AC Back + - x ÷ ( ) =  -->
+
+<!-- ( ) Back AC -->
+<!-- 7 8 9 ÷ -->
+<!-- 4 5 6 x -->
+<!-- 1 2 3 - -->
+<!-- 0 . = + -->

@@ -1,0 +1,24 @@
+#inputs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#inputs > button {
+    width: 16vw;
+    height: 16vw;
+    line-height: 16vw;
+    border-radius: 25%;
+    margin: 0.05em;
+}
+
+.symbol {
+    background-color: #000c3d;
+}
+
+.number {
+    background-color: #000415;
+}
+
+.special {
+
+}
