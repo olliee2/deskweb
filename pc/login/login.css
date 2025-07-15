@@ -1,13 +1,9 @@
 body {
-    background-color: #222;
-    color: white;
-    margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 2.5vw;
 }
 
 h1 {
