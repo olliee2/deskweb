@@ -9,9 +9,6 @@ async function showWeather(latitude, longitude) {
         console.error('No temperature data available');
         return;
     }
-    const weatherDays = document.getElementById('weather-days');
-    if (!weatherDays)
-        throw new Error('Missing weather-days');
     displayTemperatures(data.daily.temperature_2m_max);
 }
 async function fetchWeather(latitude, longitude) {
@@ -29,7 +26,7 @@ async function fetchWeather(latitude, longitude) {
 }
 function displayTemperatures(temperatures) {
     const weatherDays = document.getElementById('weather-days');
-    if (!weatherDays)
+    if (!(weatherDays instanceof HTMLElement))
         throw new Error('Missing weather-days');
     weatherDays.classList.remove('hidden');
     const frag = document.createDocumentFragment();
@@ -75,9 +72,24 @@ function manuallyShowWeather(error) {
         throw new Error('Missing manual-coords');
     manualCoords.classList.remove('hidden');
     const latitudeInput = document.getElementById('latitude');
-    if (!latitudeInput)
+    if (!(latitudeInput instanceof HTMLInputElement))
         throw new Error('Missing latitude');
     const longitudeInput = document.getElementById('longitude');
-    if (!longitudeInput)
+    if (!(longitudeInput instanceof HTMLInputElement))
         throw new Error('Missing longitude');
+    const submitButton = document.getElementById('submit');
+    if (!(submitButton instanceof HTMLButtonElement))
+        throw new Error('Missing submit');
+    submitButton.addEventListener('click', () => {
+        const latitude = Number(latitudeInput.value);
+        const longitude = Number(longitudeInput.value);
+        if (!isFinite(latitude) || !isFinite(longitude)) {
+            console.error('Invalid longitude or latitude');
+        }
+        else {
+            showWeather(Number(latitudeInput.value), Number(longitudeInput.value)).catch((e) => {
+                console.error(e);
+            });
+        }
+    });
 }
