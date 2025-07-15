@@ -35,7 +35,6 @@ ul {
     border: 1px solid gray;
     border-radius: 1rem;
     width: clamp(180px, 28vw, 350px);
-    /*height: fit-content;*/
     background: rgba(30, 34, 40, 0.8);
     box-sizing: border-box;
     padding: 1rem;
