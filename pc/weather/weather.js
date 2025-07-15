@@ -3,16 +3,17 @@ if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition((position) => showWeather(position.coords.latitude, position.coords.longitude), manuallyShowWeather);
 }
 async function showWeather(latitude, longitude) {
-    var _a;
+    var _a, _b;
     const data = await fetchTemperature(latitude, longitude);
-    if (!((_a = data === null || data === void 0 ? void 0 : data.daily) === null || _a === void 0 ? void 0 : _a.temperature_2m_max)) {
-        console.error('No temperature data available');
+    console.log(data);
+    if (!((_a = data === null || data === void 0 ? void 0 : data.daily) === null || _a === void 0 ? void 0 : _a.temperature_2m_max) || !((_b = data === null || data === void 0 ? void 0 : data.daily) === null || _b === void 0 ? void 0 : _b.weather_code)) {
+        console.error('Insufficient weather data available');
         return;
     }
-    displayTemperatures(data.daily.temperature_2m_max);
+    displayWeather(data.daily.temperature_2m_max, data.daily.weather_code);
 }
 async function fetchTemperature(latitude, longitude) {
-    const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max`;
+    const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,weather_code&timezone=auto`;
     try {
         const response = await fetch(apiUrl);
         if (!response.ok)
@@ -20,11 +21,11 @@ async function fetchTemperature(latitude, longitude) {
         return await response.json();
     }
     catch (error) {
-        console.error('There has been a problem with fetching the weather:', error);
+        console.error('There has been a problem with fetching the temperature:', error);
         return null;
     }
 }
-function displayTemperatures(temperatures) {
+function displayWeather(temperatures, weathers) {
     const weatherDays = document.getElementById('weather-days');
     if (!(weatherDays instanceof HTMLElement))
         throw new Error('Missing weather-days');
@@ -46,9 +47,24 @@ function displayTemperatures(temperatures) {
         const dayOfMonth = date.getDate();
         const ending = getEnding(dayOfMonth);
         const weekday = dayNames[date.getDay()];
-        const li = document.createElement('li');
-        li.textContent = `${weekday} ${dayOfMonth}${ending}: ${temp}°C`;
-        frag.append(li);
+        const weatherCode = weathers[i];
+        const div = document.createElement('div');
+        const img = document.createElement('img');
+        if (weatherCode < 15) {
+            img.src = '../assets/sun.svg';
+        }
+        else if (weatherCode < 40) {
+            img.src = '../assets/cloud.svg';
+        }
+        else if (weatherCode < 80) {
+            img.src = '../assets/rain.svg';
+        }
+        else {
+            img.src = '../assets/storm.svg';
+        }
+        div.textContent = `${weekday} ${dayOfMonth}${ending}: ${temp}°C, WMO Code ${weathers[i]}`;
+        div.className = 'day';
+        frag.append(div);
     });
     weatherDays.replaceChildren(frag);
 }

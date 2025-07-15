@@ -9,6 +9,7 @@ if ('geolocation' in navigator) {
 interface WeatherApiResponse {
   daily?: {
     temperature_2m_max?: number[];
+    weather_code?: number[];
     [key: string]: unknown;
   };
 
@@ -17,30 +18,34 @@ interface WeatherApiResponse {
 
 async function showWeather(latitude: number, longitude: number) {
   const data = await fetchTemperature(latitude, longitude);
-  if (!data?.daily?.temperature_2m_max) {
-    console.error('No temperature data available');
+  console.log(data);
+  if (!data?.daily?.temperature_2m_max || !data?.daily?.weather_code) {
+    console.error('Insufficient weather data available');
     return;
   }
-  displayTemperatures(data.daily.temperature_2m_max);
+  displayWeather(data.daily.temperature_2m_max, data.daily.weather_code);
 }
 
 async function fetchTemperature(
   latitude: number,
   longitude: number,
 ): Promise<WeatherApiResponse | null> {
-  const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max`;
+  const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,weather_code&timezone=auto`;
 
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();
   } catch (error) {
-    console.error('There has been a problem with fetching the weather:', error);
+    console.error(
+      'There has been a problem with fetching the temperature:',
+      error,
+    );
     return null;
   }
 }
 
-function displayTemperatures(temperatures: number[]) {
+function displayWeather(temperatures: number[], weathers: number[]) {
   const weatherDays = document.getElementById('weather-days');
   if (!(weatherDays instanceof HTMLElement))
     throw new Error('Missing weather-days');
@@ -65,9 +70,21 @@ function displayTemperatures(temperatures: number[]) {
     const dayOfMonth = date.getDate();
     const ending = getEnding(dayOfMonth);
     const weekday = dayNames[date.getDay()];
-    const li = document.createElement('li');
-    li.textContent = `${weekday} ${dayOfMonth}${ending}: ${temp}°C`;
-    frag.append(li);
+    const weatherCode = weathers[i];
+    const div = document.createElement('div');
+    const img = document.createElement('img');
+    if (weatherCode < 15) {
+      img.src = '../assets/sun.svg';
+    } else if (weatherCode < 40) {
+      img.src = '../assets/cloud.svg';
+    } else if (weatherCode < 80) {
+      img.src = '../assets/rain.svg';
+    } else {
+      img.src = '../assets/storm.svg';
+    }
+    div.textContent = `${weekday} ${dayOfMonth}${ending}: ${temp}°C, WMO Code ${weathers[i]}`;
+    div.className = 'day';
+    frag.append(div);
   });
 
   weatherDays.replaceChildren(frag);
