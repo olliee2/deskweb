@@ -1,10 +1,10 @@
 "use strict";
 if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(showWeather);
+    navigator.geolocation.getCurrentPosition((position) => showWeather(position.coords.latitude, position.coords.longitude), manuallyShowWeather);
 }
-async function showWeather(position) {
+async function showWeather(latitude, longitude) {
     var _a;
-    const data = await fetchWeather(position);
+    const data = await fetchWeather(latitude, longitude);
     if (!((_a = data === null || data === void 0 ? void 0 : data.daily) === null || _a === void 0 ? void 0 : _a.temperature_2m_max)) {
         console.error('No temperature data available');
         return;
@@ -14,8 +14,7 @@ async function showWeather(position) {
         throw new Error('Missing weather-days');
     displayTemperatures(data.daily.temperature_2m_max);
 }
-async function fetchWeather(position) {
-    const { latitude, longitude } = position.coords;
+async function fetchWeather(latitude, longitude) {
     const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max`;
     try {
         const response = await fetch(apiUrl);
@@ -32,6 +31,7 @@ function displayTemperatures(temperatures) {
     const weatherDays = document.getElementById('weather-days');
     if (!weatherDays)
         throw new Error('Missing weather-days');
+    weatherDays.classList.remove('hidden');
     const frag = document.createDocumentFragment();
     const today = new Date();
     const dayNames = [
@@ -63,4 +63,14 @@ function getEnding(number) {
     if (number % 10 === 3 && number % 100 !== 13)
         return 'rd';
     return 'th';
+}
+function manuallyShowWeather(error) {
+    console.error(error);
+    const weatherDays = document.getElementById('weather-days');
+    if (!weatherDays)
+        throw new Error('Missing weather-days');
+    weatherDays.classList.add('hidden');
+    const manualCoords = document.getElementById('manual-coords');
+    if (!manualCoords)
+        throw new Error('Missing manual-coords');
 }
