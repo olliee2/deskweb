@@ -43,24 +43,24 @@ function displayTemperatures(temperatures) {
         'Friday',
         'Saturday',
     ];
-    for (let i = 0; i < temperatures.length; i++) {
+    temperatures.forEach((temp, i) => {
         const date = new Date(today);
         date.setDate(today.getDate() + i);
         const dayOfMonth = date.getDate();
         const ending = getEnding(dayOfMonth);
         const weekday = dayNames[date.getDay()];
         const li = document.createElement('li');
-        li.textContent = `${weekday} ${dayOfMonth}${ending}: ${temperatures[i]}°C`;
+        li.textContent = `${weekday} ${dayOfMonth}${ending}: ${temp}°C`;
         frag.append(li);
-    }
+    });
     weatherDays.replaceChildren(frag);
 }
 function getEnding(number) {
-    return number % 10 === 1 && number % 100 !== 11
-        ? 'st'
-        : number % 10 === 2 && number % 100 !== 12
-            ? 'nd'
-            : number % 10 === 3 && number % 100 !== 13
-                ? 'rd'
-                : 'th';
+    if (number % 10 === 1 && number % 100 !== 11)
+        return 'st';
+    if (number % 10 === 2 && number % 100 !== 12)
+        return 'nd';
+    if (number % 10 === 3 && number % 100 !== 13)
+        return 'rd';
+    return 'th';
 }
