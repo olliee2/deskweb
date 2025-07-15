@@ -68,10 +68,13 @@ function displayWeather(temperatures, weathers) {
             img.src = '../assets/storm.svg';
             img.alt = 'Stormy';
         }
+        const h2 = document.createElement('h2');
+        h2.className = 'title';
+        h2.textContent = `${weekday} ${dayOfMonth}${ending}`;
         const span = document.createElement('span');
         span.className = 'subtitle';
-        span.textContent = `${weekday} ${dayOfMonth}${ending}: ${temp}°C`;
-        div.append(img, span);
+        span.textContent = `${temp}°C`;
+        div.append(img, h2, span);
         frag.append(div);
     });
     weatherDays.replaceChildren(frag);

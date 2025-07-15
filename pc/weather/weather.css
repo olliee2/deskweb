@@ -9,3 +9,37 @@ ul {
 .hidden {
     display: none;
 }
+
+#weather-days {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.day {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 5%;
+    width: 30vw;
+    height: 30vw;
+}
+
+.weather {
+    width: 15vw;
+    height: 15vw;
+}
+
+.title {
+    text-align: center;
+    font-size: 3.5vw;
+    margin: 0;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 3vw;
+    margin: 0;
+}
