@@ -1,120 +1,93 @@
 body {
+    background-color: #222;
     color: white;
-    background: #181c20;
-    font-family: system-ui, sans-serif;
     margin: 0;
+    font-size: 2.5vw;
 }
 
 #container {
+    width: 100vw;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding: 1rem;
+    padding: 2vw 0;
     box-sizing: border-box;
 }
 
-ul {
-    list-style: none;
+h1 {
+    font-size: 4vw;
+    margin: 1vw 0;
 }
 
 #weather-days {
     display: flex;
     flex-wrap: wrap;
+    gap: 2vw;
     justify-content: center;
-    gap: 2rem;
     width: 100%;
-    margin: 2rem 0;
+    margin-bottom: 2vw;
 }
 
-.day {
+#weather-days > div {
+    background: #333;
+    border-radius: 1vw;
+    padding: 2vw;
+    min-width: 20vw;
+    max-width: 22vw;
+    width: 20vw;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 2vw;
+    flex: 1 1 20vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid gray;
-    border-radius: 1rem;
-    width: clamp(180px, 28vw, 350px);
-    background: rgba(30, 34, 40, 0.8);
-    box-sizing: border-box;
-    padding: 1rem;
-    box-shadow: 0 2px 8px #0002;
-}
-
-.weather {
-    width: clamp(60px, 8vw, 120px);
-    height: clamp(60px, 8vw, 120px);
-    margin-bottom: 0.5rem;
-}
-
-.title {
-    text-align: center;
-    font-size: clamp(1.2rem, 2.5vw, 2.2rem);
-    margin: 0.5rem 0 0.2rem 0;
-    font-weight: 600;
-}
-
-.subtitle {
-    text-align: center;
-    font-size: clamp(1rem, 1.8vw, 1.3rem);
-    margin: 0 0 0.5rem 0;
-    font-weight: 400;
-}
-
-a:link {
-    color: lightskyblue;
-}
-
-a:visited {
-    color: #72bff1;
-}
-
-a:hover {
-    color: #ffffff;
-}
-
-a:active {
-    color: #ff4040;
-    text-decoration: none;
-    font-weight: normal;
 }
 
 #manual-coords {
-    margin: 1rem 0;
+    margin: 2vw 0;
     display: flex;
-    gap: 0.5rem;
+    flex-wrap: wrap;
+    gap: 1vw;
     align-items: center;
 }
 
-@media (max-width: 600px) {
-    #weather-days {
-        gap: 1rem;
-    }
+label, input, button {
+    font-size: 2vw;
+}
 
-    .day {
-        width: clamp(120px, 40vw, 200px);
-        height: clamp(120px, 40vw, 200px);
-        padding: 0.5rem;
-    }
-
-    .weather {
-        width: clamp(40px, 12vw, 80px);
-        height: clamp(40px, 12vw, 80px);
-    }
-
-    .subtitle {
-        font-size: 0.95rem;
-        padding: 0 2px;
-        max-width: 100%;
-        word-break: break-word;
-    }
-
-    #manual-coords {
-        flex-direction: column;
-        align-items: stretch;
-    }
+button {
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    border: none;
+    background: #444;
+    color: white;
+    cursor: pointer;
 }
 
 .hidden {
     display: none;
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 4vw;
+    }
+
+    h1 {
+        font-size: 8vw;
+    }
+
+    #weather-days > div {
+        min-width: 40vw;
+        max-width: 44vw;
+        width: 40vw;
+        font-size: 4vw;
+        flex: 1 1 40vw;
+    }
+
+    label, input, button {
+        font-size: 4vw;
+    }
 }

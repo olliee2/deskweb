@@ -78,6 +78,10 @@ function displayWeather(temperatures, weathers) {
         frag.append(div);
     });
     weatherDays.replaceChildren(frag);
+    const attribution = document.getElementById('attribution');
+    if (!(attribution instanceof HTMLElement))
+        throw new Error('Missing attribution');
+    attribution.classList.remove('hidden');
 }
 function getEnding(number) {
     if (number % 10 === 1 && number % 100 !== 11)
@@ -90,14 +94,9 @@ function getEnding(number) {
 }
 function manuallyShowWeather(error) {
     console.error(error);
-    const weatherDays = document.getElementById('weather-days');
-    if (!weatherDays)
-        throw new Error('Missing weather-days');
-    weatherDays.classList.add('hidden');
     const manualCoords = document.getElementById('manual-coords');
     if (!manualCoords)
         throw new Error('Missing manual-coords');
-    manualCoords.classList.remove('hidden');
     const latitudeInput = document.getElementById('latitude');
     if (!(latitudeInput instanceof HTMLInputElement))
         throw new Error('Missing latitude');

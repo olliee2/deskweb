@@ -3,27 +3,65 @@ body {
     color: white;
     margin: 0;
     overflow: hidden;
+    font-size: 2.5vw;
 }
 
 #container {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    width: 100vw;
 }
 
 iframe {
     border: none;
     height: 90vh;
     width: 100vw;
+    max-width: 100vw;
+    max-height: 90vh;
 }
 
 #taskbar {
     box-sizing: border-box;
-    padding: 0.5vh;
+    padding: 0.5vh 1vw;
     background-color: #270f36;
     height: 10vh;
-    font-size: 7vh;
+    font-size: 5vw;
     width: 100vw;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+#taskbar button {
+    background: none;
+    border: none;
+    padding: 0.5em;
+    margin: 0 0.2em;
+    cursor: pointer;
+    width: 2.5em;
+    height: 2.5em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#taskbar img {
+    width: 2em;
+    height: 2em;
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 4vw;
+    }
+
+    #taskbar {
+        font-size: 8vw;
+        height: 12vh;
+    }
+
+    iframe {
+        height: 88vh;
+    }
 }

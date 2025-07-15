@@ -2,6 +2,7 @@ body {
     margin: 0;
     height: 100vh;
     color: white;
+    font-size: 2.5vw;
 }
 
 #container {
@@ -13,16 +14,54 @@ body {
 
 header {
     height: 10vh;
-    font-size: 6vh;
+    font-size: 5vw;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    padding: 0 1vw;
 }
 
 textarea {
     flex: 1 1 auto;
-    font-size: 4vh;
+    font-size: 4vw;
     width: 100%;
     border: none;
     resize: none;
     outline: none;
     box-sizing: border-box;
+    padding: 1vw;
+}
+
+header button {
+    background: none;
+    border: none;
+    padding: 0.5em;
+    margin: 0 0.2em;
+    cursor: pointer;
+    width: 2.5em;
+    height: 2.5em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header img {
+    width: 2em;
+    height: 2em;
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 4vw;
+    }
+
+    header {
+        font-size: 8vw;
+        height: 12vh;
+    }
+
+    textarea {
+        font-size: 6vw;
+    }
 }

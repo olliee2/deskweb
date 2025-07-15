@@ -8,15 +8,13 @@
 <body>
 <div id="container">
     <h1>Weather</h1>
-    <div id="weather-days">
-        <div>Loading...</div>
-    </div>
-    <div class="hidden" id="manual-coords">
+    <div id="manual-coords">
         <label for="latitude">Latitude: </label><input id="latitude" name="latitude" type="number">
         <label for="longitude">Longitude: </label><input id="longitude" name="longitude" type="number">
         <button id="submit">Submit</button>
     </div>
-    <div>Data provided by <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></div>
+    <div id="weather-days"></div>
+    <div id="attribution" class="hidden">Data provided by <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></div>
 </div>
 <script src="weather.js"></script>
 </body>
