@@ -6,7 +6,7 @@ if (!destination) throw new Error('Missing destination');
 const duration = Number(params.get('duration'));
 if (!duration) throw new Error('Missing duration');
 const dotsSpan = document.getElementById('dots');
-if (!dotsSpan) throw new Error('Missing dotsSpan');
+if (!(dotsSpan instanceof HTMLElement)) throw new Error('Missing dotsSpan');
 
 setTimeout(() => {
   redirect(destination);

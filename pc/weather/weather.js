@@ -73,4 +73,11 @@ function manuallyShowWeather(error) {
     const manualCoords = document.getElementById('manual-coords');
     if (!manualCoords)
         throw new Error('Missing manual-coords');
+    manualCoords.classList.remove('hidden');
+    const latitudeInput = document.getElementById('latitude');
+    if (!latitudeInput)
+        throw new Error('Missing latitude');
+    const longitudeInput = document.getElementById('longitude');
+    if (!longitudeInput)
+        throw new Error('Missing longitude');
 }

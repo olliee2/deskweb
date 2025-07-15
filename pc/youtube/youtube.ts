@@ -27,8 +27,10 @@ const playlist: Video[] = [
   { name: 'My Dearest Friends', id: 'VHN63n9y1vg' },
 ];
 
-const ytPlayer = document.getElementById('ytplayer') as HTMLIFrameElement;
-if (!ytPlayer) throw new Error('Missing ytplayer');
+const ytPlayerEl = document.getElementById('ytplayer');
+if (!(ytPlayerEl instanceof HTMLIFrameElement))
+  throw new Error('Missing or invalid ytplayer');
+const ytPlayer = ytPlayerEl;
 const playlistList = document.getElementById('playlist-container');
 if (!playlistList) throw new Error('Missing playlist-list');
 
@@ -46,8 +48,10 @@ for (const video of playlist) {
 }
 playlistList.replaceChildren(ul);
 
-const searchBar = document.getElementById('search-bar') as HTMLInputElement;
-if (!searchBar) throw new Error('Missing search-bar');
+const searchBarEl = document.getElementById('search-bar');
+if (!(searchBarEl instanceof HTMLInputElement))
+  throw new Error('Missing or invalid search-bar');
+const searchBar = searchBarEl;
 
 searchBar.value = '';
 

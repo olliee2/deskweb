@@ -22,9 +22,10 @@ const playlist = [
     { name: 'Heart of the Mountain', id: 'DNOuancg5RY' },
     { name: 'My Dearest Friends', id: 'VHN63n9y1vg' },
 ];
-const ytPlayer = document.getElementById('ytplayer');
-if (!ytPlayer)
-    throw new Error('Missing ytplayer');
+const ytPlayerEl = document.getElementById('ytplayer');
+if (!(ytPlayerEl instanceof HTMLIFrameElement))
+    throw new Error('Missing or invalid ytplayer');
+const ytPlayer = ytPlayerEl;
 const playlistList = document.getElementById('playlist-container');
 if (!playlistList)
     throw new Error('Missing playlist-list');
@@ -41,9 +42,10 @@ for (const video of playlist) {
     ul.append(li);
 }
 playlistList.replaceChildren(ul);
-const searchBar = document.getElementById('search-bar');
-if (!searchBar)
-    throw new Error('Missing search-bar');
+const searchBarEl = document.getElementById('search-bar');
+if (!(searchBarEl instanceof HTMLInputElement))
+    throw new Error('Missing or invalid search-bar');
+const searchBar = searchBarEl;
 searchBar.value = '';
 const submitSearch = document.getElementById('submit-search');
 if (!submitSearch)

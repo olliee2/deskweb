@@ -1,5 +1,5 @@
 const pc = document.getElementById('pc')!;
-if (!pc) throw new Error('Missing pc');
+if (!(pc instanceof HTMLElement)) throw new Error('Missing or invalid pc');
 
 function resizePC() {
   const w = Math.ceil(window.innerWidth * 0.441);

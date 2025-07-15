@@ -1,16 +1,13 @@
 "use strict";
 const pad = document.getElementById('pad');
-if (!pad)
-    throw new Error('Missing pad');
+if (!(pad instanceof HTMLTextAreaElement))
+    throw new Error('Missing or invalid pad');
 const save = document.getElementById('save');
-if (!save)
-    throw new Error('Missing save');
+if (!(save instanceof HTMLButtonElement))
+    throw new Error('Missing or invalid save');
 const load = document.getElementById('load');
-if (!load)
-    throw new Error('Missing load');
-const spellcheck = document.getElementById('spellcheck');
-if (!spellcheck)
-    throw new Error('Missing spellcheck');
+if (!(load instanceof HTMLButtonElement))
+    throw new Error('Missing or invalid load');
 save.addEventListener('click', () => {
     localStorage.setItem('notepad-text', pad.value);
 });
@@ -18,6 +15,9 @@ load.addEventListener('click', () => {
     var _a;
     pad.value = (_a = localStorage.getItem('notepad-text')) !== null && _a !== void 0 ? _a : '';
 });
+const spellcheck = document.getElementById('spellcheck');
+if (!(spellcheck instanceof HTMLInputElement))
+    throw new Error('Missing or invalid spellcheck');
 spellcheck.addEventListener('change', () => {
     pad.spellcheck = spellcheck.checked;
 });

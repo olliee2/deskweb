@@ -1,19 +1,23 @@
-const pad = document.getElementById('pad') as HTMLTextAreaElement;
-if (!pad) throw new Error('Missing pad');
+const pad = document.getElementById('pad');
+if (!(pad instanceof HTMLTextAreaElement))
+  throw new Error('Missing or invalid pad');
 const save = document.getElementById('save');
-if (!save) throw new Error('Missing save');
+if (!(save instanceof HTMLButtonElement))
+  throw new Error('Missing or invalid save');
 const load = document.getElementById('load');
-if (!load) throw new Error('Missing load');
-const spellcheck = document.getElementById('spellcheck') as HTMLInputElement;
-if (!spellcheck) throw new Error('Missing spellcheck');
+if (!(load instanceof HTMLButtonElement))
+  throw new Error('Missing or invalid load');
 
 save.addEventListener('click', () => {
   localStorage.setItem('notepad-text', pad.value);
 });
-
 load.addEventListener('click', () => {
   pad.value = localStorage.getItem('notepad-text') ?? '';
 });
+
+const spellcheck = document.getElementById('spellcheck');
+if (!(spellcheck instanceof HTMLInputElement))
+  throw new Error('Missing or invalid spellcheck');
 
 spellcheck.addEventListener('change', () => {
   pad.spellcheck = spellcheck.checked;

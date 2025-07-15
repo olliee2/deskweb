@@ -1,7 +1,8 @@
 "use strict";
-const timeElement = document.getElementById('time');
-if (!timeElement)
-    throw new Error('Missing time');
+const timeEl = document.getElementById('time');
+if (!(timeEl instanceof HTMLTimeElement))
+    throw new Error('Missing or invalid time');
+const timeElement = timeEl;
 function renderTime() {
     const currentDate = new Date();
     const hours = currentDate.getHours();
@@ -11,23 +12,23 @@ function renderTime() {
     timeElement.dateTime = time;
 }
 const appIframe = document.getElementById('app');
-if (!appIframe)
-    throw new Error('Missing app');
+if (!(appIframe instanceof HTMLIFrameElement))
+    throw new Error('Missing or invalid app');
 const homeButton = document.getElementById('home');
-if (!homeButton)
-    throw new Error('Missing home');
+if (!(homeButton instanceof HTMLButtonElement))
+    throw new Error('Missing or invalid home');
 homeButton.addEventListener('click', () => {
     appIframe.src = '../shortcuts/index.html';
 });
 const back = document.getElementById('back');
-if (!back)
-    throw new Error('Missing back');
-const forward = document.getElementById('forward');
-if (!forward)
-    throw new Error('Missing forward');
+if (!(back instanceof HTMLButtonElement))
+    throw new Error('Missing or invalid back');
 back.addEventListener('click', () => {
     history.back();
 });
+const forward = document.getElementById('forward');
+if (!(forward instanceof HTMLButtonElement))
+    throw new Error('Missing or invalid forward');
 forward.addEventListener('click', () => {
     history.forward();
 });
