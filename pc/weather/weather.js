@@ -1,31 +1,26 @@
 "use strict";
 if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition((position) => {
-        showWeather(position);
-    });
+    navigator.geolocation.getCurrentPosition(showWeather);
 }
-function showWeather(position) {
-    fetchWeather(position).then((data) => {
-        if (data && data.daily && data.daily.temperature_2m_max) {
-            const weatherDays = document.getElementById('weather-days');
-            if (!weatherDays)
-                throw new Error('Missing weather-days');
-            displayTemperatures(data.daily.temperature_2m_max);
-        }
-        else {
-            console.error('No temperature data available');
-        }
-    });
+async function showWeather(position) {
+    var _a;
+    const data = await fetchWeather(position);
+    if (!((_a = data === null || data === void 0 ? void 0 : data.daily) === null || _a === void 0 ? void 0 : _a.temperature_2m_max)) {
+        console.error('No temperature data available');
+        return;
+    }
+    const weatherDays = document.getElementById('weather-days');
+    if (!weatherDays)
+        throw new Error('Missing weather-days');
+    displayTemperatures(data.daily.temperature_2m_max);
 }
 async function fetchWeather(position) {
-    const lat = position.coords.latitude; // Temp latitude
-    const lon = position.coords.longitude; // Temp longitude
-    const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max`;
+    const { latitude, longitude } = position.coords;
+    const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max`;
     try {
         const response = await fetch(apiUrl);
-        if (!response.ok) {
+        if (!response.ok)
             throw new Error('Network response was not ok');
-        }
         return await response.json();
     }
     catch (error) {
@@ -35,9 +30,9 @@ async function fetchWeather(position) {
 }
 function displayTemperatures(temperatures) {
     const weatherDays = document.getElementById('weather-days');
-    const frag = document.createDocumentFragment();
     if (!weatherDays)
         throw new Error('Missing weather-days');
+    const frag = document.createDocumentFragment();
     const today = new Date();
     const dayNames = [
         'Sunday',
