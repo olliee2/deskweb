@@ -49,21 +49,29 @@ function displayWeather(temperatures, weathers) {
         const weekday = dayNames[date.getDay()];
         const weatherCode = weathers[i];
         const div = document.createElement('div');
+        div.className = 'day';
         const img = document.createElement('img');
-        if (weatherCode < 15) {
+        img.className = 'weather';
+        if (weatherCode < 25) {
             img.src = '../assets/sun.svg';
+            img.alt = 'Sunny';
         }
-        else if (weatherCode < 40) {
+        else if (weatherCode < 50) {
             img.src = '../assets/cloud.svg';
+            img.alt = 'Cloudy';
         }
-        else if (weatherCode < 80) {
+        else if (weatherCode < 90) {
             img.src = '../assets/rain.svg';
+            img.alt = 'Rainy';
         }
         else {
             img.src = '../assets/storm.svg';
+            img.alt = 'Stormy';
         }
-        div.textContent = `${weekday} ${dayOfMonth}${ending}: ${temp}°C, WMO Code ${weathers[i]}`;
-        div.className = 'day';
+        const span = document.createElement('span');
+        span.className = 'subtitle';
+        span.textContent = `${weekday} ${dayOfMonth}${ending}: ${temp}°C`;
+        div.append(img, span);
         frag.append(div);
     });
     weatherDays.replaceChildren(frag);
