@@ -20,7 +20,7 @@ function showWeather(position: GeolocationPosition) {
       if (!weatherDays) throw new Error('Missing weather-days');
       displayTemperatures(data.daily.temperature_2m_max);
     } else {
-      console.log('No temperature data available');
+      console.error('No temperature data available');
     }
   });
 }
@@ -28,7 +28,6 @@ function showWeather(position: GeolocationPosition) {
 async function fetchWeather(
   position: GeolocationPosition,
 ): Promise<WeatherApiResponse | null> {
-  console.log(position.coords);
   const lat = position.coords.latitude; // Temp latitude
   const lon = position.coords.longitude; // Temp longitude
   const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max`;
@@ -38,11 +37,9 @@ async function fetchWeather(
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    const data1 = await response.json();
-    console.log('Weather data:', data1);
-    return data1;
+    return await response.json();
   } catch (error) {
-    console.error('There has been a problem with your fetch operation:', error);
+    console.error('There has been a problem with fetching the weather:', error);
     return null;
   }
 }
@@ -68,7 +65,6 @@ function displayTemperatures(temperatures: number[]) {
     const weekday = dayNames[date.getDay()];
     const li = document.createElement('li');
     li.textContent = `${weekday}: ${temperatures[i]}°C`;
-    console.log(li);
     frag.append(li);
   }
   weatherDays.replaceChildren(frag);
