@@ -34,11 +34,16 @@ const clearButton = document.getElementById('clear');
 if (!(clearButton instanceof HTMLElement))
     throw new Error('Missing clear');
 equalsButton.addEventListener('click', () => {
-    answerDiv.textContent = calculateEquation(equation);
+    answerDiv.textContent = calculateEquation(equation).toString();
 });
 backspaceButton.addEventListener('click', () => {
     equation = equation.slice(0, -1);
     equationDiv.textContent = equation;
+    answerDiv.textContent = '';
+});
+clearButton.addEventListener('click', () => {
+    equation = '';
+    equationDiv.textContent = '';
     answerDiv.textContent = '';
 });
 document.addEventListener('keydown', (ev) => {
@@ -49,18 +54,27 @@ document.addEventListener('keydown', (ev) => {
         equation += key;
         equationDiv.textContent = equation;
     }
+    else if (key === '*') {
+        equation += '×';
+        equationDiv.textContent = equation;
+    }
     else if (key === '/') {
         equation += '÷';
         equationDiv.textContent = equation;
     }
     else if (key === 'Enter' || key === '=') {
-        answerDiv.textContent = calculateEquation(equation);
+        answerDiv.textContent = calculateEquation(equation).toString();
     }
 });
 function calculateEquation(equation) {
     console.log(equation);
-    const exampleEquation = '(1+1)/3';
-    if (!equationValid(exampleEquation)) {
-    }
+    const exampleEquation = '(111.3+71)÷3';
+    tokenize(exampleEquation);
     return 4;
+}
+function tokenize(expression) {
+    var _a;
+    const tokens = (_a = expression.match(/(\d+\.?\d*)|\+|-|×|÷|\(|\)/g)) !== null && _a !== void 0 ? _a : [];
+    console.log(tokens);
+    return tokens;
 }
