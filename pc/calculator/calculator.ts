@@ -67,15 +67,78 @@ document.addEventListener('keydown', (ev) => {
   }
 });
 
+function solveTokens(tokens: string[]) {
+  let pos = 0;
+
+  function peek() {
+    return tokens[pos];
+  }
+
+  function consume() {
+    return tokens[pos++];
+  }
+
+  function parsePrimary(): number {
+    const token = peek();
+    if (token === '-') {
+      consume();
+      return -parsePrimary();
+    }
+    if (token === '+') {
+      consume();
+      return parsePrimary();
+    }
+    if (token === '(') {
+      consume();
+      const value = parseExpression();
+      if (peek() === ')') consume();
+      return value;
+    }
+    if (/^\d+(\.\d+)?$/.test(token)) {
+      consume();
+      return parseFloat(token);
+    }
+    throw new Error('Unexpected token: ' + token);
+  }
+
+  function parseFactor(): number {
+    let value = parsePrimary();
+    while (peek() === '×' || peek() === '÷') {
+      const op = consume();
+      const rhs = parsePrimary();
+      if (op === '×') value *= rhs;
+      else if (op === '÷') value /= rhs;
+    }
+    return value;
+  }
+
+  function parseExpression(): number {
+    let value = parseFactor();
+    while (peek() === '+' || peek() === '-') {
+      const op = consume();
+      const rhs = parseFactor();
+      if (op === '+') value += rhs;
+      else if (op === '-') value -= rhs;
+    }
+    return value;
+  }
+
+  const result = parseExpression();
+  if (pos < tokens.length)
+    throw new Error('Unexpected token at end: ' + tokens[pos]);
+  return result;
+}
+
 function calculateEquation(equation: string) {
-  console.log(equation);
-  const exampleEquation = '(111.3+71)÷3';
-  tokenize(exampleEquation);
-  return 4;
+  const tokens = tokenize(equation);
+  try {
+    return solveTokens(tokens);
+  } catch (e) {
+    console.error(e);
+    return 'Error';
+  }
 }
 
 function tokenize(expression: string) {
-  const tokens = expression.match(/(\d+\.?\d*)|\+|-|×|÷|\(|\)/g) ?? [];
-  console.log(tokens);
-  return tokens;
+  return expression.match(/(\d+\.?\d*)|\+|-|×|÷|\(|\)/g) ?? [];
 }
