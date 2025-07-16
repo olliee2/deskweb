@@ -1,3 +1,7 @@
+:root {
+    --button-size: min(8vw, 15vh)
+}
+
 #container {
     display: flex;
     flex-direction: column;
@@ -11,8 +15,8 @@ h1 {
 
 #output {
     width: 80vw;
-    height: 5rem;
-    margin-bottom: 1rem;
+    height: min(5rem, 20vh);
+    margin-bottom: 1em;
     display: flex;
     flex-direction: column;
 }
@@ -43,15 +47,16 @@ h1 {
 
 #inputs {
     display: grid;
-    grid-template-columns: repeat(4, 8vw);
+    grid-template-columns: repeat(4, var(--button-size));
     gap: 0.3vw;
     justify-content: center;
 }
 
 #inputs > button {
-    width: 8vw;
-    height: 8vw;
-    line-height: 8vw;
+    width: var(--button-size);
+    height: var(--button-size);
+    line-height: var(--button-size);
+    font-size: 2rem;
     border-radius: 25%;
     margin: 0.05em;
 }

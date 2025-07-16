@@ -5,6 +5,7 @@ if (!(answerDiv instanceof HTMLElement)) throw new Error('Missing answer');
 
 const symbols: string[] = [];
 let equation = '';
+let answer = '';
 
 const characterButtons = document.getElementsByClassName('character');
 for (const button of characterButtons) {
@@ -19,8 +20,13 @@ for (const button of characterButtons) {
   symbols.push(symbol);
 
   button.addEventListener('click', () => {
+    if (answer && ['+', '-', '×', '÷'].includes(symbol)) {
+      equation = answer;
+      answer = '';
+    }
     equation += symbol;
     equationDiv.textContent = equation;
+    answer = '';
     answerDiv.textContent = '';
   });
 }
@@ -34,18 +40,21 @@ const clearButton = document.getElementById('clear');
 if (!(clearButton instanceof HTMLElement)) throw new Error('Missing clear');
 
 equalsButton.addEventListener('click', () => {
-  answerDiv.textContent = calculateEquation(equation).toString();
+  answer = calculateEquation(equation).toString();
+  answerDiv.textContent = answer;
 });
 
 backspaceButton.addEventListener('click', () => {
   equation = equation.slice(0, -1);
   equationDiv.textContent = equation;
+  answer = '';
   answerDiv.textContent = '';
 });
 
 clearButton.addEventListener('click', () => {
   equation = '';
   equationDiv.textContent = '';
+  answer = '';
   answerDiv.textContent = '';
 });
 
@@ -63,7 +72,8 @@ document.addEventListener('keydown', (ev) => {
     equation += '÷';
     equationDiv.textContent = equation;
   } else if (key === 'Enter' || key === '=') {
-    answerDiv.textContent = calculateEquation(equation).toString();
+    answer = calculateEquation(equation).toString();
+    answerDiv.textContent = answer;
   }
 });
 
