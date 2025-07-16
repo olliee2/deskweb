@@ -1,12 +1,57 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+#output {
+    width: 80vw;
+    height: 5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#equation, #answer {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+#equation {
+    background-color: #111;
+    border-top-left-radius: 2.5rem;
+    border-top-right-radius: 2.5rem;
+}
+
+#answer {
+    background-color: #000;
+    border-bottom-left-radius: 2.5rem;
+    border-bottom-right-radius: 2.5rem;
+}
+
+.in-progress {
+    color: #949494;
+}
+
 #inputs {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 8vw);
+    gap: 0.3vw;
+    justify-content: center;
 }
 
 #inputs > button {
-    width: 16vw;
-    height: 16vw;
-    line-height: 16vw;
+    width: 8vw;
+    height: 8vw;
+    line-height: 8vw;
     border-radius: 25%;
     margin: 0.05em;
 }
@@ -20,5 +65,5 @@
 }
 
 .special {
-
+    background-color: #633a00;
 }
