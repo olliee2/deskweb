@@ -3,7 +3,7 @@
 
 ## About
 
-An online computer with a variety of different applications! Accessible at https://olliee2.github.io/deskweb/
+An online computer with a variety of different applications! Accessible at https://deskweb.pages.dev/
 
 ## Usage & Hosting
 
