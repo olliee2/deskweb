@@ -41,10 +41,6 @@
     align-items: center;
 }
 
-label, input, button {
-    /* font-size, background, color, border, border-radius, box-sizing, transition now in base.css */
-}
-
 button {
     padding: 0.5em 1em;
     border-radius: 0.5em;

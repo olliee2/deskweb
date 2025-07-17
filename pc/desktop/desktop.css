@@ -27,7 +27,6 @@ iframe {
 }
 
 #taskbar button {
-    /* background, border, cursor, display, align-items, justify-content now in base.css */
     background: none;
     padding: 0.5em;
     margin: 0 0.2em;
@@ -41,10 +40,6 @@ iframe {
 }
 
 @media (max-width: 600px) {
-    /* body {
-        font-size: 4vw;
-    } */
-
     #taskbar {
         font-size: 8vw;
         height: 12vh;
