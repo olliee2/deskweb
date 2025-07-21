@@ -21,6 +21,11 @@
     height: 100px;
 }
 
+.mole:hover {
+    filter: brightness(1.5);
+    transition: all 0.5s ease;
+}
+
 .mole-wrapper {
     position: absolute;
     -moz-user-select: none;

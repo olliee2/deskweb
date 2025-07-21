@@ -67,6 +67,17 @@ export default class Game {
         wrapper.style.top = `${top}px`;
         wrapper.addEventListener('click', () => {
             this.score++;
+            const explosionWrapper = document.createElement('div');
+            explosionWrapper.className = 'mole-wrapper';
+            const explosion = document.createElement('img');
+            explosion.src = '../assets/explosion.svg';
+            explosion.className = 'mole';
+            explosion.draggable = false;
+            explosionWrapper.append(explosion);
+            explosionWrapper.style.left = wrapper.style.left;
+            explosionWrapper.style.top = wrapper.style.top;
+            setTimeout(() => explosionWrapper.remove(), 500);
+            this.moleContainer.append(explosionWrapper);
             wrapper.remove();
         });
         setTimeout(() => wrapper.remove(), 1000);
