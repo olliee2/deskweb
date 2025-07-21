@@ -1,10 +1,10 @@
 export default class Game {
-  private duration = 30000;
+  private duration = 9000;
   private startTime = 0;
   private endTime = 0;
   private nextSpawn = 0;
-  private spawnIntervalMin = 700;
-  private spawnIntervalMax = 1700;
+  private spawnIntervalMin = 400;
+  private spawnIntervalMax = 1900;
   private score = 0;
   private readonly left: number;
   private readonly right: number;
@@ -31,6 +31,7 @@ export default class Game {
     this.nextSpawn =
       this.startTime +
       this.randomRange(this.spawnIntervalMin, this.spawnIntervalMax);
+    this.moleContainer.replaceChildren();
     this.active = true;
 
     this.tickLoop();
@@ -49,6 +50,12 @@ export default class Game {
     }
     if (this.active) {
       requestAnimationFrame(() => this.tickLoop());
+    } else {
+      const message = document.createElement('span');
+      message.className = 'message';
+      message.textContent = 'Finished!';
+      console.log(message);
+      document.body.append(message);
     }
   }
 

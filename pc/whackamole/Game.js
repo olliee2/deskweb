@@ -3,12 +3,12 @@ export default class Game {
         this.moleContainer = moleContainer;
         this.timeDisplay = timeDisplay;
         this.scoreDisplay = scoreDisplay;
-        this.duration = 30000;
+        this.duration = 9000;
         this.startTime = 0;
         this.endTime = 0;
         this.nextSpawn = 0;
-        this.spawnIntervalMin = 700;
-        this.spawnIntervalMax = 1700;
+        this.spawnIntervalMin = 400;
+        this.spawnIntervalMax = 1900;
         this.score = 0;
         this.active = false;
         const rect = moleContainer.getBoundingClientRect();
@@ -24,6 +24,7 @@ export default class Game {
         this.nextSpawn =
             this.startTime +
                 this.randomRange(this.spawnIntervalMin, this.spawnIntervalMax);
+        this.moleContainer.replaceChildren();
         this.active = true;
         this.tickLoop();
     }
@@ -39,6 +40,13 @@ export default class Game {
         }
         if (this.active) {
             requestAnimationFrame(() => this.tickLoop());
+        }
+        else {
+            const message = document.createElement('span');
+            message.className = 'message';
+            message.textContent = 'Finished!';
+            console.log(message);
+            document.body.append(message);
         }
     }
     tick(now) {

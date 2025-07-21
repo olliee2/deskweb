@@ -9,6 +9,7 @@
     display: flex;
     justify-content: space-around;
     background-color: green;
+    font-size: 5vw;
 }
 
 #mole-container {
@@ -31,4 +32,10 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+}
+
+.message {
+    position: absolute;
+    margin: 0 0 auto;
+    font-size: 10vw;
 }
