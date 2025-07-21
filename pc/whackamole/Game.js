@@ -84,6 +84,10 @@ export default class Game {
             if (this.score > this.hiscore) {
                 this.hiscore = this.score;
             }
+            const sfx = new Audio('../assets/explosion.mp3');
+            sfx.play().catch((e) => {
+                console.error(e);
+            });
             const explosionWrapper = document.createElement('div');
             explosionWrapper.className = 'mole-wrapper';
             const explosion = document.createElement('img');
