@@ -12,6 +12,10 @@
     font-size: 5vw;
 }
 
+#retry {
+    background: none;
+}
+
 #mole-container {
     cursor: url("../assets/hammer.cur"), auto;
     height: 100%;
