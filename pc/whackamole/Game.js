@@ -51,14 +51,16 @@ export default class Game {
     }
     tick(now) {
         if (now >= this.nextSpawn) {
-            this.nextSpawn += this.randomRange(this.spawnIntervalMin, this.spawnIntervalMax);
+            this.nextSpawn +=
+                this.randomRange(this.spawnIntervalMin, this.spawnIntervalMax) *
+                    Math.pow(0.95, this.score);
             this.spawnMole();
         }
     }
     render(now) {
         const seconds = Math.floor((now - this.startTime) / 1000).toString();
         this.timeDisplay.textContent = seconds;
-        this.timeDisplay.dateTime = seconds + 's';
+        this.timeDisplay.dateTime = `${seconds}s`;
         this.scoreDisplay.textContent = this.score.toString();
         this.hiscoreDisplay.textContent = this.hiscore.toString();
     }
