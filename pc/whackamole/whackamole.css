@@ -11,8 +11,13 @@
     background-color: green;
 }
 
-#canvas {
-    background-color: blue;
-    height: 100%;
+#mole-container {
     cursor: url("../assets/hammer.cur"), auto;
+    height: 100%;
+}
+
+.mole {
+    position: absolute;
+    width: min(10vw, 10vh);
+    height: min(10vw, 10vh);
 }
