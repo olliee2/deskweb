@@ -10,13 +10,15 @@ const todosList = document.getElementById('todos');
 if (!todosList)
     throw new Error('Missing todos');
 todoInput.value = '';
-let todos = JSON.parse((_a = localStorage.getItem('todos-todos')) !== null && _a !== void 0 ? _a : '[]');
+// eslint-disable-next-line prefer-const
+let todos = new Set(JSON.parse((_a = localStorage.getItem('todos-todos')) !== null && _a !== void 0 ? _a : '[]'));
 submitButton.addEventListener('click', () => {
     const todoMessage = todoInput.value;
-    if (!todoMessage || todos.includes(todoMessage))
+    if (!todoMessage || todos.has(todoMessage))
         return;
     todoInput.value = '';
-    todos.push(todoMessage);
+    todos.add(todoMessage);
+    localStorage.setItem('todos-todos', JSON.stringify([...todos]));
     render();
 });
 function render() {
@@ -30,10 +32,13 @@ function render() {
         checkbox.addEventListener('change', () => {
             if (checkbox.checked) {
                 li.classList.add('completed');
+                todos.delete(todo);
             }
             else {
                 li.classList.remove('completed');
+                todos.add(todo);
             }
+            localStorage.setItem('todos-todos', JSON.stringify([...todos]));
         });
         const label = document.createElement('label');
         label.className = 'todo-message';

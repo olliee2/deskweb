@@ -7,14 +7,18 @@ if (!todosList) throw new Error('Missing todos');
 
 todoInput.value = '';
 
-let todos = JSON.parse(localStorage.getItem('todos-todos') ?? '[]') as string[];
+// eslint-disable-next-line prefer-const
+let todos: Set<string> = new Set(
+  JSON.parse(localStorage.getItem('todos-todos') ?? '[]'),
+);
 
 submitButton.addEventListener('click', () => {
   const todoMessage = todoInput.value;
-  if (!todoMessage || todos.includes(todoMessage)) return;
+  if (!todoMessage || todos.has(todoMessage)) return;
 
   todoInput.value = '';
-  todos.push(todoMessage);
+  todos.add(todoMessage);
+  localStorage.setItem('todos-todos', JSON.stringify([...todos]));
   render();
 });
 
@@ -30,9 +34,12 @@ function render() {
     checkbox.addEventListener('change', () => {
       if (checkbox.checked) {
         li.classList.add('completed');
+        todos.delete(todo);
       } else {
         li.classList.remove('completed');
+        todos.add(todo);
       }
+      localStorage.setItem('todos-todos', JSON.stringify([...todos]));
     });
 
     const label = document.createElement('label');
