@@ -14,11 +14,6 @@ export default class Game {
         this.hiscore = 0;
         this.active = false;
         this.hiscore = Number(localStorage.getItem('whackamole-hiscore'));
-        const rect = moleContainer.getBoundingClientRect();
-        this.left = rect.left;
-        this.right = rect.right;
-        this.top = rect.top;
-        this.bottom = rect.bottom;
     }
     start() {
         this.score = 0;
@@ -50,7 +45,7 @@ export default class Game {
             localStorage.setItem('whackamole-hiscore', this.hiscore.toString());
             const message = document.createElement('span');
             message.className = 'message';
-            message.textContent = 'Finished!';
+            message.textContent = `Game complete! ${this.score} moles squashed!`;
             document.body.append(message);
         }
     }
@@ -75,8 +70,11 @@ export default class Game {
         mole.className = 'mole';
         mole.draggable = false;
         wrapper.append(mole);
-        const left = this.randomRange(this.left, this.right - 100);
-        const top = this.randomRange(this.top, this.bottom - 100);
+        const moleSize = 100;
+        const maxLeft = this.moleContainer.clientWidth - moleSize;
+        const maxTop = this.moleContainer.clientHeight - moleSize;
+        const left = this.randomRange(0, maxLeft);
+        const top = this.randomRange(0, maxTop);
         wrapper.style.left = `${left}px`;
         wrapper.style.top = `${top}px`;
         wrapper.addEventListener('click', () => {
