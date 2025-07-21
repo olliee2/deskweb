@@ -11,12 +11,19 @@ export default class Game {
         this.spawnIntervalMax = 1700;
         this.score = 0;
         this.active = false;
+        const rect = moleContainer.getBoundingClientRect();
+        this.left = rect.left;
+        this.right = rect.right;
+        this.top = rect.top;
+        this.bottom = rect.bottom;
     }
     start() {
         this.score = 0;
         this.startTime = performance.now();
         this.endTime = this.startTime + this.duration;
-        this.nextSpawn = this.startTime + this.randomInterval();
+        this.nextSpawn =
+            this.startTime +
+                this.randomRange(this.spawnIntervalMin, this.spawnIntervalMax);
         this.active = true;
         this.tickLoop();
     }
@@ -36,12 +43,14 @@ export default class Game {
     }
     tick(now) {
         if (now >= this.nextSpawn) {
-            this.nextSpawn += this.randomInterval();
+            this.nextSpawn += this.randomRange(this.spawnIntervalMin, this.spawnIntervalMax);
             this.spawnMole();
         }
     }
     render(now) {
-        this.timeDisplay.textContent = (now - this.startTime).toString();
+        const seconds = Math.floor((now - this.startTime) / 1000).toString();
+        this.timeDisplay.textContent = seconds;
+        this.timeDisplay.dateTime = seconds + 's';
         this.scoreDisplay.textContent = this.score.toString();
     }
     spawnMole() {
@@ -50,15 +59,20 @@ export default class Game {
         const mole = document.createElement('img');
         mole.src = '../assets/mole.svg';
         mole.className = 'mole';
+        mole.draggable = false;
         wrapper.append(mole);
+        const left = this.randomRange(this.left, this.right - 100);
+        const top = this.randomRange(this.top, this.bottom - 100);
+        wrapper.style.left = `${left}px`;
+        wrapper.style.top = `${top}px`;
         wrapper.addEventListener('click', () => {
-            console.log('clicked');
             this.score++;
+            wrapper.remove();
         });
+        setTimeout(() => wrapper.remove(), 1000);
         this.moleContainer.append(wrapper);
     }
-    randomInterval() {
-        return (this.spawnIntervalMin +
-            Math.random() * (this.spawnIntervalMax - this.spawnIntervalMin));
+    randomRange(min, max) {
+        return min + Math.random() * (max - min);
     }
 }
