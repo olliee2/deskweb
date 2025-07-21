@@ -3,27 +3,51 @@
     flex-direction: column;
     height: 100vh;
     width: 100vw;
+    align-items: center;
+    justify-content: center;
 }
 
 #info-bar {
     display: flex;
     justify-content: space-around;
-    background-color: green;
-    font-size: 5vw;
+    background: rgba(0, 0, 0, 0.7);
+    font-size: 3vw;
+    align-items: center;
+    width: 80vw;
+    margin: 2vw auto 1vw auto;
+    border-radius: 1vw;
+    padding: 1vw 0;
+    gap: 2vw;
 }
 
 #retry {
     background: none;
+    width: 3vw;
+    height: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff2;
+    margin-left: 2vw;
 }
 
 #mole-container {
+    position: relative;
+    margin: 0 auto;
+    width: 60vw;
+    height: 60vw;
+    min-width: 300px;
+    min-height: 300px;
+    border: 8px solid #222;
+    overflow: hidden;
     cursor: url("../assets/hammer.cur"), auto;
-    height: 100%;
 }
 
 .mole {
     width: 100px;
     height: 100px;
+    pointer-events: none;
+    user-select: none;
 }
 
 .mole:hover {
@@ -36,10 +60,25 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+    z-index: 2;
 }
 
 .message {
-    position: absolute;
-    margin: 0 0 auto;
-    font-size: 10vw;
+    position: fixed;
+    top: 40%;
+    font-size: 8vw;
+    text-align: center;
+    z-index: 5;
+    margin: 0;
+    pointer-events: none;
+    animation: fade-in 0.5s;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
 }

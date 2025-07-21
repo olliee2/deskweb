@@ -4,7 +4,7 @@ export default class Game {
         this.timeDisplay = timeDisplay;
         this.scoreDisplay = scoreDisplay;
         this.hiscoreDisplay = hiscoreDisplay;
-        this.duration = 20000;
+        this.duration = 2000;
         this.startTime = 0;
         this.endTime = 0;
         this.nextSpawn = 0;
