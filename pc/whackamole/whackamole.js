@@ -1,4 +1,4 @@
-"use strict";
+import Game from './Game.js';
 const moleContainer = document.getElementById('mole-container');
 if (!moleContainer)
     throw new Error('Missing mole-container');

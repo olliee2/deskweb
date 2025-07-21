@@ -4,33 +4,38 @@ export default class Game {
         this.timeDisplay = timeDisplay;
         this.scoreDisplay = scoreDisplay;
         this.duration = 30;
-        this.firstSpawn = 0;
+        this.startTime = 0;
         this.nextSpawn = 0;
         this.spawnIntervalMin = 0.7;
         this.spawnIntervalMax = 1.7;
         this.score = 0;
-        this.timePassed = 0;
         this.active = false;
     }
     start() {
-        this.timePassed = 0;
         this.score = 0;
-        this.firstSpawn = performance.now();
-        this.nextSpawn = this.firstSpawn + this.randomInterval();
+        this.startTime = performance.now();
+        this.nextSpawn = this.startTime + this.randomInterval();
         this.active = true;
-        this.tick();
+        this.tickLoop();
     }
     stop() {
         this.active = false;
     }
-    tick() {
+    tickLoop() {
         const now = performance.now();
+        this.tick(now);
+        this.render(now);
+        if (this.active) {
+            requestAnimationFrame(this.tickLoop);
+        }
+    }
+    tick(now) {
         if (now >= this.nextSpawn) {
             this.spawnMole();
         }
-        if (this.active) {
-            requestAnimationFrame(this.tick);
-        }
+    }
+    render(now) {
+        this.timeDisplay.textContent = (now - this.startTime).toString();
     }
     spawnMole() {
         const mole = document.createElement('img');
