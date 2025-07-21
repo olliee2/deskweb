@@ -1,21 +1,45 @@
 "use strict";
+var _a;
 const todoInput = document.getElementById('todo');
 if (!(todoInput instanceof HTMLInputElement))
     throw new Error('Missing todo');
 const submitButton = document.getElementById('submit');
 if (!submitButton)
     throw new Error('Missing submit');
-const todos = document.getElementById('todos');
-if (!todos)
+const todosList = document.getElementById('todos');
+if (!todosList)
     throw new Error('Missing todos');
 todoInput.value = '';
+let todos = JSON.parse((_a = localStorage.getItem('todos-todos')) !== null && _a !== void 0 ? _a : '[]');
 submitButton.addEventListener('click', () => {
     const todoMessage = todoInput.value;
-    if (!todoMessage)
+    if (!todoMessage || todos.includes(todoMessage))
         return;
     todoInput.value = '';
-    const li = document.createElement('li');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    li.append(checkbox);
+    todos.push(todoMessage);
+    render();
 });
+function render() {
+    todosList.replaceChildren();
+    for (const todo of todos) {
+        const li = document.createElement('li');
+        li.className = 'todo';
+        const checkbox = document.createElement('input');
+        checkbox.className = 'todo-checkbox';
+        checkbox.type = 'checkbox';
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                li.classList.add('completed');
+            }
+            else {
+                li.classList.remove('completed');
+            }
+        });
+        const label = document.createElement('label');
+        label.className = 'todo-message';
+        label.textContent = todo;
+        li.append(checkbox, label);
+        todosList.append(li);
+    }
+}
+render();
