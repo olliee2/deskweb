@@ -1,16 +1,19 @@
 export default class Game {
-    constructor(moleContainer, timeDisplay, scoreDisplay) {
+    constructor(moleContainer, timeDisplay, scoreDisplay, hiscoreDisplay) {
         this.moleContainer = moleContainer;
         this.timeDisplay = timeDisplay;
         this.scoreDisplay = scoreDisplay;
-        this.duration = 9000;
+        this.hiscoreDisplay = hiscoreDisplay;
+        this.duration = 20000;
         this.startTime = 0;
         this.endTime = 0;
         this.nextSpawn = 0;
         this.spawnIntervalMin = 400;
-        this.spawnIntervalMax = 1900;
+        this.spawnIntervalMax = 1200;
         this.score = 0;
+        this.hiscore = 0;
         this.active = false;
+        this.hiscore = Number(localStorage.getItem('whackamole-hiscore'));
         const rect = moleContainer.getBoundingClientRect();
         this.left = rect.left;
         this.right = rect.right;
@@ -25,6 +28,7 @@ export default class Game {
             this.startTime +
                 this.randomRange(this.spawnIntervalMin, this.spawnIntervalMax);
         this.moleContainer.replaceChildren();
+        [...document.getElementsByClassName('message')].forEach((elem) => elem.remove());
         this.active = true;
         this.tickLoop();
     }
@@ -42,10 +46,11 @@ export default class Game {
             requestAnimationFrame(() => this.tickLoop());
         }
         else {
+            this.moleContainer.replaceChildren();
+            localStorage.setItem('whackamole-hiscore', this.hiscore.toString());
             const message = document.createElement('span');
             message.className = 'message';
             message.textContent = 'Finished!';
-            console.log(message);
             document.body.append(message);
         }
     }
@@ -60,6 +65,7 @@ export default class Game {
         this.timeDisplay.textContent = seconds;
         this.timeDisplay.dateTime = seconds + 's';
         this.scoreDisplay.textContent = this.score.toString();
+        this.hiscoreDisplay.textContent = this.hiscore.toString();
     }
     spawnMole() {
         const wrapper = document.createElement('div');
@@ -75,6 +81,9 @@ export default class Game {
         wrapper.style.top = `${top}px`;
         wrapper.addEventListener('click', () => {
             this.score++;
+            if (this.score > this.hiscore) {
+                this.hiscore = this.score;
+            }
             const explosionWrapper = document.createElement('div');
             explosionWrapper.className = 'mole-wrapper';
             const explosion = document.createElement('img');

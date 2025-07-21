@@ -1,11 +1,12 @@
 export default class Game {
-  private duration = 9000;
+  private duration = 20000;
   private startTime = 0;
   private endTime = 0;
   private nextSpawn = 0;
   private spawnIntervalMin = 400;
-  private spawnIntervalMax = 1900;
+  private spawnIntervalMax = 1200;
   private score = 0;
+  private hiscore = 0;
   private readonly left: number;
   private readonly right: number;
   private readonly top: number;
@@ -16,7 +17,9 @@ export default class Game {
     private moleContainer: HTMLElement,
     private timeDisplay: HTMLTimeElement,
     private scoreDisplay: HTMLElement,
+    private hiscoreDisplay: HTMLElement,
   ) {
+    this.hiscore = Number(localStorage.getItem('whackamole-hiscore'));
     const rect = moleContainer.getBoundingClientRect();
     this.left = rect.left;
     this.right = rect.right;
@@ -32,6 +35,9 @@ export default class Game {
       this.startTime +
       this.randomRange(this.spawnIntervalMin, this.spawnIntervalMax);
     this.moleContainer.replaceChildren();
+    [...document.getElementsByClassName('message')].forEach((elem) =>
+      elem.remove(),
+    );
     this.active = true;
 
     this.tickLoop();
@@ -51,10 +57,11 @@ export default class Game {
     if (this.active) {
       requestAnimationFrame(() => this.tickLoop());
     } else {
+      this.moleContainer.replaceChildren();
+      localStorage.setItem('whackamole-hiscore', this.hiscore.toString());
       const message = document.createElement('span');
       message.className = 'message';
       message.textContent = 'Finished!';
-      console.log(message);
       document.body.append(message);
     }
   }
@@ -74,6 +81,7 @@ export default class Game {
     this.timeDisplay.textContent = seconds;
     this.timeDisplay.dateTime = seconds + 's';
     this.scoreDisplay.textContent = this.score.toString();
+    this.hiscoreDisplay.textContent = this.hiscore.toString();
   }
 
   private spawnMole() {
@@ -94,6 +102,9 @@ export default class Game {
 
     wrapper.addEventListener('click', () => {
       this.score++;
+      if (this.score > this.hiscore) {
+        this.hiscore = this.score;
+      }
 
       const explosionWrapper = document.createElement('div');
       explosionWrapper.className = 'mole-wrapper';
