@@ -29,24 +29,22 @@ export default class Game {
     }
     stop() {
         this.active = false;
+        this.moleContainer.replaceChildren();
+        localStorage.setItem('whackamole-hiscore', this.hiscore.toString());
+        const message = document.createElement('span');
+        message.className = 'message';
+        message.textContent = `Game complete! ${this.score} moles squashed!`;
+        document.body.append(message);
     }
     tickLoop() {
         const now = performance.now();
         this.tick(now);
         this.render(now);
         if (now >= this.endTime) {
-            this.active = false;
+            this.stop();
         }
         if (this.active) {
             requestAnimationFrame(() => this.tickLoop());
-        }
-        else {
-            this.moleContainer.replaceChildren();
-            localStorage.setItem('whackamole-hiscore', this.hiscore.toString());
-            const message = document.createElement('span');
-            message.className = 'message';
-            message.textContent = `Game complete! ${this.score} moles squashed!`;
-            document.body.append(message);
         }
     }
     tick(now) {

@@ -34,8 +34,14 @@ export default class Game {
     this.tickLoop();
   }
 
-  stop() {
+  private stop() {
     this.active = false;
+    this.moleContainer.replaceChildren();
+    localStorage.setItem('whackamole-hiscore', this.hiscore.toString());
+    const message = document.createElement('span');
+    message.className = 'message';
+    message.textContent = `Game complete! ${this.score} moles squashed!`;
+    document.body.append(message);
   }
 
   private tickLoop() {
@@ -43,17 +49,10 @@ export default class Game {
     this.tick(now);
     this.render(now);
     if (now >= this.endTime) {
-      this.active = false;
+      this.stop();
     }
     if (this.active) {
       requestAnimationFrame(() => this.tickLoop());
-    } else {
-      this.moleContainer.replaceChildren();
-      localStorage.setItem('whackamole-hiscore', this.hiscore.toString());
-      const message = document.createElement('span');
-      message.className = 'message';
-      message.textContent = `Game complete! ${this.score} moles squashed!`;
-      document.body.append(message);
     }
   }
 
