@@ -1,5 +1,5 @@
 export default class Game {
-  private duration = 2000;
+  private duration = 20000;
   private startTime = 0;
   private endTime = 0;
   private nextSpawn = 0;
