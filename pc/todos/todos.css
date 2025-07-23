@@ -16,19 +16,18 @@ body {
     gap: 1em;
 }
 
-label {
-    font-size: 4vw;
+label, #todo, #submit {
+    font-size: 1.25rem;
 }
 
 #todo {
-    font-size: 4vw;
     height: 2.5rem;
 }
 
 #submit {
-    font-size: 4vw;
     border-radius: 1vw;
     height: 2.5rem;
+    width: 2.5rem;
 }
 
 #todos {

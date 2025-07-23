@@ -23,10 +23,11 @@ submitButton.addEventListener('click', () => {
 });
 function render() {
     todosList.replaceChildren();
-    for (const todo of todos) {
+    todos.forEach((todo, index) => {
         const li = document.createElement('li');
         li.className = 'todo';
         const checkbox = document.createElement('input');
+        checkbox.id = `todo-checkbox-${index}`;
         checkbox.className = 'todo-checkbox';
         checkbox.type = 'checkbox';
         checkbox.addEventListener('change', () => {
@@ -41,10 +42,11 @@ function render() {
             localStorage.setItem('todos-todos', JSON.stringify([...todos]));
         });
         const label = document.createElement('label');
+        label.htmlFor = `todo-checkbox-${index}`;
         label.className = 'todo-message';
         label.textContent = todo;
         li.append(checkbox, label);
         todosList.append(li);
-    }
+    });
 }
 render();
